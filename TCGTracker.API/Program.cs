@@ -11,6 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IMockData, MockData>();
 builder.Services.AddTransient<IPlayerDAL, PlayerDAL>();
+builder.Services.AddTransient<IDeckDAL, DeckDAL>();
+
 
 var app = builder.Build();
 
