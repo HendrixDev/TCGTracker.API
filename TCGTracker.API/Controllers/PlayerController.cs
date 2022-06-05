@@ -10,9 +10,11 @@ namespace TCGTracker.API.Controllers
     [ApiController]
     public class PlayerController : ControllerBase
     {
+        //fields
         private readonly ILogger<PlayerController> _logger;
         private readonly IPlayerDAL _playerDAL; 
 
+        //constructor
         public PlayerController(ILogger<PlayerController> logger, IPlayerDAL playerDAL)
         {
             _logger = logger;
