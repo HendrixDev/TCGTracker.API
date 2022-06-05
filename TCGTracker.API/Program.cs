@@ -12,7 +12,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IMockData, MockData>();
 builder.Services.AddTransient<IPlayerDAL, PlayerDAL>();
 builder.Services.AddTransient<IDeckDAL, DeckDAL>();
-
+builder.Services.AddTransient<IMatchDAL, MatchDAL>();
 
 var app = builder.Build();
 
