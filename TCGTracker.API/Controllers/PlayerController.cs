@@ -23,11 +23,18 @@ namespace TCGTracker.API.Controllers
 
         // GET: api/<PlayerController>
         [HttpGet]
-        public IActionResult GetAllPlayers()
+        public async Task<IActionResult> GetAllPlayers()
         {
-            _logger.Log(LogLevel.Information, message: "Getting all players");
-            var players = _playerDAL.GetAllPlayers();
-            return Ok(players);
+            try
+            {
+                _logger.Log(LogLevel.Information, message: "Getting all players");
+                var players = await _playerDAL.GetAllPlayers();
+                return Ok(players);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         // GET api/<PlayerController>/5

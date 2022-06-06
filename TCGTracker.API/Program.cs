@@ -1,3 +1,4 @@
+using TCGTracker.API.Context;
 using TCGTracker.API.DAL;
 using TCGTracker.API.DAL.Interface;
 
@@ -9,6 +10,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<DapperContext>();
 builder.Services.AddTransient<IMockData, MockData>();
 builder.Services.AddTransient<IPlayerDAL, PlayerDAL>();
 builder.Services.AddTransient<IDeckDAL, DeckDAL>();

@@ -19,7 +19,7 @@ namespace TCGTracker.API
             _deckDAL = deckDAL;
         }
         // GET: api/<DeckController>
-        [HttpGet("{id}")]
+        [HttpGet("{playerId}")]
         public IActionResult GetAllDecksByPlayerId(int playerId)
         {
             _logger.Log(LogLevel.Information, message: "Getting all Decks");

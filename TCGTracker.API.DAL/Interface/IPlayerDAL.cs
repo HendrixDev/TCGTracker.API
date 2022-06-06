@@ -4,9 +4,9 @@ namespace TCGTracker.API.DAL.Interface
 {
     public interface IPlayerDAL
     {
-        List<Player> GetAllPlayers();
+        Task<IEnumerable<Player>> GetAllPlayers();
         Player GetPlayerById(int id);
         int CreatePlayer(Player player);
-        void UpdatePlayer(int id, Player player);
+        bool UpdatePlayer(int id, Player player);
     }
 }
