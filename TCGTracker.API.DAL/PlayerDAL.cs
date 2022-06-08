@@ -7,18 +7,19 @@ namespace TCGTracker.API.DAL
 {
     public class PlayerDAL : IPlayerDAL
     {
-        private readonly IMockData _mockData;
         private readonly DapperContext _context;
 
-        public PlayerDAL(IMockData mockData, DapperContext context)
+        public PlayerDAL(DapperContext context)
         {
-            _mockData = mockData;
             _context = context;
         }
 
         public int CreatePlayer(Player player)
         {
-            return player.PlayerId;
+            //var query = "SELECT * FROM Players";
+            //using var connection = _context.CreateConnection();
+            //var players = await connection.QueryAsync<Player>(query);
+            //return players.ToList();
         }
 
         public async Task<IEnumerable<Player>> GetAllPlayers()
@@ -29,9 +30,12 @@ namespace TCGTracker.API.DAL
             return players.ToList();
         }
 
-        public Player GetPlayerById(int id)
+        public async Task<Player> GetPlayerById(int id)
         {
-            return _mockData.GetMockPlayers().FirstOrDefault(x => x.PlayerId == id);
+            var query = $"SELECT TOP 1 * FROM Players WHERE PlayerId = {id}";
+            using var connection = _context.CreateConnection();
+            var player = await connection.QueryAsync<Player>(query);
+            return player.First();
         }
 
         public bool UpdatePlayer(int id, Player player)
