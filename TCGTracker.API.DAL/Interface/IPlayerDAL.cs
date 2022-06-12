@@ -6,7 +6,7 @@ namespace TCGTracker.API.DAL.Interface
     {
         Task<IEnumerable<Player>> GetAllPlayers();
         Task<Player> GetPlayerById(int id);
-        int CreatePlayer(Player player);
+        Task<int> CreatePlayer(Player player);
         bool UpdatePlayer(int id, Player player);
     }
 }
