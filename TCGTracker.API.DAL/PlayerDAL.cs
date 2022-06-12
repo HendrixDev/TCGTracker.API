@@ -14,12 +14,13 @@ namespace TCGTracker.API.DAL
             _context = context;
         }
 
-        public int CreatePlayer(Player player)
+        public async Task<int> CreatePlayer(Player player)
         {
-            //var query = "SELECT * FROM Players";
-            //using var connection = _context.CreateConnection();
-            //var players = await connection.QueryAsync<Player>(query);
-            //return players.ToList();
+            //TODO: add query to create player
+            var query = "";
+            using var connection = _context.CreateConnection();
+            var playerId = await connection.QueryAsync<int>(query);
+            return playerId.FirstOrDefault();
         }
 
         public async Task<IEnumerable<Player>> GetAllPlayers()
