@@ -4,9 +4,9 @@ namespace TCGTracker.API.DAL.Interface
 {
     public interface IDeckDAL
     {
-        List<Deck> GetAllDecksByPlayerId(int playerId);
-        Deck GetDeckById(int id);
-        int CreateDeck(int playerId, Deck deck);
-        void UpdateDeck(int id, Deck deck);
+        Task<IEnumerable<Deck>> GetAllDecksByPlayerId(int playerId);
+        Task<Deck> GetDeckById(int id);
+        Task<int> CreateDeck(int playerId, Deck deck);
+        Task<bool> UpdateDeck(int id, Deck deck);
     }
 }

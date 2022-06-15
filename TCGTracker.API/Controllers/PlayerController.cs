@@ -12,7 +12,7 @@ namespace TCGTracker.API.Controllers
     {
         //fields
         private readonly ILogger<PlayerController> _logger;
-        private readonly IPlayerDAL _playerDAL; 
+        private readonly IPlayerDAL _playerDAL;
 
         //constructor
         public PlayerController(ILogger<PlayerController> logger, IPlayerDAL playerDAL)
@@ -39,27 +39,50 @@ namespace TCGTracker.API.Controllers
 
         // GET api/<PlayerController>/5
         [HttpGet("{id}")]
-        public IActionResult GetPlayerById(int id)
+        public async Task<IActionResult> GetPlayerById(int id)
         {
-            _logger.Log(LogLevel.Information, message: "Getting player with ID: {0}", id);
-            var player = _playerDAL.GetPlayerById(id);
-            return Ok(player);
+            try
+            {
+                _logger.Log(LogLevel.Information, message: "Getting player with ID: {0}", id);
+                var player = await _playerDAL.GetPlayerById(id);
+                return Ok(player);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         // POST api/<PlayerController>
         [HttpPost]
-        public IActionResult CreatePlayer([FromBody] Player player)
+        public async Task<IActionResult> CreatePlayer([FromBody] Player player)
         {
-            var newPlayerId = _playerDAL.CreatePlayer(player);
-            _logger.Log(LogLevel.Information, message: "Created player with new PlayerId: {0}", newPlayerId);
-            return Ok(newPlayerId);
+            try
+            {
+                var newPlayerId = await _playerDAL.CreatePlayer(player);
+                _logger.Log(LogLevel.Information, message: "Created player with new PlayerId: {0}", newPlayerId);
+                return Ok(newPlayerId);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         // PUT api/<PlayerController>/5
         [HttpPut("{id}")]
-        public void UpdatePlayer(int id, [FromBody] Player player)
+        public async Task<IActionResult> UpdatePlayer(int id, [FromBody] Player player)
         {
-            _playerDAL.UpdatePlayer(id, player);
+            try
+            {
+                var playerUpdated = await _playerDAL.UpdatePlayer(id, player);
+                _logger.Log(LogLevel.Information, message: "Updated player with PlayerId: {0}", id);
+                return Ok(playerUpdated);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }

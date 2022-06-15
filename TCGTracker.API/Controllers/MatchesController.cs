@@ -21,11 +21,11 @@ namespace TCGTracker.API.Controllers
         }
 
         // GET: api/<MatchController>
-        [HttpGet]
-        public IActionResult GetAllMatches()
+        [HttpGet("{playerId}")]
+        public IActionResult GetAllMatchesByPlayerId(int playerId)
         {
-            _logger.Log(LogLevel.Information, message: "Getting all Matches");
-            var matches = _matchDAL.GetAllMatches();
+            _logger.Log(LogLevel.Information, message: "Getting all Matches for player with Id: {0}", playerId);
+            var matches = _matchDAL.GetAllMatchesByPlayerId(playerId);
             return Ok(matches);
         }
 

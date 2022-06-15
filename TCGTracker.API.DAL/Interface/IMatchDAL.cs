@@ -4,9 +4,9 @@ namespace TCGTracker.API.DAL.Interface
 {
     public interface IMatchDAL
     {
-        List<Match> GetAllMatches();
-        Match GetMatchById(int id);
-        int CreateMatch(Match Match);
-        void UpdateMatch(int id, Match Match);
+        Task<IEnumerable<Match>> GetAllMatchesByPlayerId(int playerId);
+        Task<Match> GetMatchById(int id);
+        Task<int> CreateMatch(Match Match);
+        Task<bool> UpdateMatch(int id, Match Match);
     }
 }

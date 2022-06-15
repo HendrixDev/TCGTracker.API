@@ -1,28 +1,59 @@
-﻿using TCGTracker.API.DAL.Interface;
+﻿using Dapper;
+using TCGTracker.API.Context;
+using TCGTracker.API.DAL.Interface;
 using TCGTracker.API.Entities.Models;
 
 namespace TCGTracker.API.DAL
 {
     public class DeckDAL : IDeckDAL
     {
-        public int CreateDeck(int playerId, Deck deck)
+        private readonly DapperContext _context;
+
+        public DeckDAL(DapperContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public List<Deck> GetAllDecksByPlayerId(int playerId)
+        public async Task<int> CreateDeck(int playerId, Deck deck)
         {
-            throw new NotImplementedException();
+            //TODO: add query to create deck
+            var query = "";
+            using var connection = _context.CreateConnection();
+            var deckId = await connection.QueryFirstOrDefaultAsync<int>(query);
+            return deckId;
         }
 
-        public Deck GetDeckById(int id)
+        public async Task<IEnumerable<Deck>> GetAllDecksByPlayerId(int playerId)
         {
-            throw new NotImplementedException();
+            var query = $"SELECT * FROM Decks WHERE PlayerId = {playerId}";
+            using var connection = _context.CreateConnection();
+            var decks = await connection.QueryAsync<Deck>(query);
+            return decks.ToList();
         }
 
-        public void UpdateDeck(int id, Deck deck)
+        public async Task<Deck> GetDeckById(int id)
         {
-            throw new NotImplementedException();
+            var query = $"SELECT TOP 1 * FROM Decks WHERE Id = {id}";
+            using var connection = _context.CreateConnection();
+            var deck = await connection.QueryFirstOrDefaultAsync<Deck>(query);
+            return deck;
         }
+
+        public async Task<bool> UpdateDeck(int id, Deck deck)
+        {
+            try
+            {
+                //TODO: write query to update Deck by Id
+                var query = "";
+                using var connection = _context.CreateConnection();
+                await connection.ExecuteAsync(query);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
 }

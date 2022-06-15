@@ -39,9 +39,20 @@ namespace TCGTracker.API.DAL
             return player.First();
         }
 
-        public bool UpdatePlayer(int id, Player player)
+        public async Task<bool> UpdatePlayer(int id, Player player)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //TODO: write query to update Player by Id
+                var query = "";
+                using var connection = _context.CreateConnection();
+                await connection.ExecuteAsync(query);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
