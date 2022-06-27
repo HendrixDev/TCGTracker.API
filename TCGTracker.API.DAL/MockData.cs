@@ -16,19 +16,19 @@ namespace TCGTracker.API.DAL
                         new Deck {
                             PlayerId = 1,
                             DeckId = 1,
-                            DeckName = "Firefighters",
+                            Name = "Firefighters",
                             DeckTypes = new List<Type> { Type.Fire, Type.Fighting }
                         },
                         new Deck {
                             PlayerId = 1,
                             DeckId = 2,
-                            DeckName = "RayEels",
+                            Name = "RayEels",
                             DeckTypes = new List<Type> { Type.Electric, Type.Dragon }
                         },
                         new Deck {
                             PlayerId = 1,
                             DeckId = 3,
-                            DeckName = "Lapras/Zacian",
+                            Name = "Lapras/Zacian",
                             DeckTypes = new List<Type> { Type.Water, Type.Metal }
                         }
                     }
@@ -40,13 +40,13 @@ namespace TCGTracker.API.DAL
                         new Deck {
                             PlayerId = 2,
                             DeckId = 4,
-                            DeckName = "Water",
+                            Name = "Water",
                             DeckTypes = new List<Type> { Type.Water }
                         },
                         new Deck {
                             PlayerId = 2,
                             DeckId = 5,
-                            DeckName = "Blastoise",
+                            Name = "Blastoise",
                             DeckTypes = new List<Type> { Type.Water }
                         }
                     }
@@ -58,7 +58,7 @@ namespace TCGTracker.API.DAL
                         new Deck {
                             PlayerId = 3,
                             DeckId = 6,
-                            DeckName = "Electric",
+                            Name = "Electric",
                             DeckTypes = new List<Type> { Type.Electric }
                         }
                     }
