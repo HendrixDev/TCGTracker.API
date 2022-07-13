@@ -37,12 +37,12 @@ namespace TCGTracker.API
         }
 
         // POST api/<DeckController>
-        [HttpPost("{id}")]
-        public IActionResult CreateDeck(int playerId, [FromBody] Deck deck)
+        [HttpPost]
+        public IActionResult CreateDeck([FromBody] Deck deck)
         {
-            var newDeckId = _deckDAL.CreateDeck(playerId, deck);
-            _logger.Log(LogLevel.Information, message: "Created Deck with new DeckId: {0}", newDeckId);
-            return Ok(newDeckId);
+            var rowsAffected = _deckDAL.CreateDeck(deck);
+            _logger.Log(LogLevel.Information, message: "Deck created successfully, rows affected: {0}", rowsAffected.Result);
+            return Ok(rowsAffected.Result);
         }
 
         // PUT api/<DeckController>/5

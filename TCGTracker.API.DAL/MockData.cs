@@ -15,19 +15,16 @@ namespace TCGTracker.API.DAL
                     Decks = new List<Deck> {
                         new Deck {
                             PlayerId = 1,
-                            DeckId = 1,
                             Name = "Firefighters",
                             DeckTypes = new List<Type> { Type.Fire, Type.Fighting }
                         },
                         new Deck {
                             PlayerId = 1,
-                            DeckId = 2,
                             Name = "RayEels",
                             DeckTypes = new List<Type> { Type.Electric, Type.Dragon }
                         },
                         new Deck {
                             PlayerId = 1,
-                            DeckId = 3,
                             Name = "Lapras/Zacian",
                             DeckTypes = new List<Type> { Type.Water, Type.Metal }
                         }
@@ -39,13 +36,11 @@ namespace TCGTracker.API.DAL
                     Decks = new List<Deck> {
                         new Deck {
                             PlayerId = 2,
-                            DeckId = 4,
                             Name = "Water",
                             DeckTypes = new List<Type> { Type.Water }
                         },
                         new Deck {
                             PlayerId = 2,
-                            DeckId = 5,
                             Name = "Blastoise",
                             DeckTypes = new List<Type> { Type.Water }
                         }
@@ -57,7 +52,6 @@ namespace TCGTracker.API.DAL
                     Decks = new List<Deck> {
                         new Deck {
                             PlayerId = 3,
-                            DeckId = 6,
                             Name = "Electric",
                             DeckTypes = new List<Type> { Type.Electric }
                         }

@@ -14,13 +14,13 @@ namespace TCGTracker.API.DAL
             _context = context;
         }
 
-        public async Task<int> CreateDeck(int playerId, Deck deck)
+        public async Task<int> CreateDeck(Deck deck)
         {
-            //TODO: add query to create deck
-            var query = "";
+            var query = "INSERT INTO Decks(Name, TotalGamesPlayed, Wins, HighestDamage, LowestDamage, PlayerId, Description) " +
+                        "VALUES(@Name, @TotalGamesPlayed, @Wins, @HighestDamage, @LowestDamage, @PlayerId, @Description)";
             using var connection = _context.CreateConnection();
-            var deckId = await connection.QueryFirstOrDefaultAsync<int>(query);
-            return deckId;
+            int rowsAffected = await connection.ExecuteAsync(query, deck);
+            return rowsAffected;
         }
 
         public async Task<IEnumerable<Deck>> GetAllDecksByPlayerId(int playerId)
