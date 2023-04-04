@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<DapperContext>();
-builder.Services.AddTransient<IMockData, MockData>();
+//builder.Services.AddTransient<IMockData, MockData>();
 builder.Services.AddTransient<IPlayerDAL, PlayerDAL>();
 builder.Services.AddTransient<IDeckDAL, DeckDAL>();
 builder.Services.AddTransient<IMatchDAL, MatchDAL>();

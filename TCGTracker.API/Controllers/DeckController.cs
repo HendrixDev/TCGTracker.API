@@ -20,19 +20,19 @@ namespace TCGTracker.API
         }
         // GET: api/<DeckController>
         [HttpGet("player/{playerId}")]
-        public IActionResult GetAllDecksByPlayerId(int playerId)
+        public async Task<IActionResult> GetAllDecksByPlayerId(int playerId)
         {
             _logger.Log(LogLevel.Information, message: "Getting all Decks for Player with PlayerID: {0}", playerId);
-            var Decks = _deckDAL.GetAllDecksByPlayerId(playerId);
-            return Ok(Decks.Result);
+            var Decks = await _deckDAL.GetAllDecksByPlayerId(playerId);
+            return Ok(Decks);
         }
 
         // GET api/<DeckController>/5
         [HttpGet("{id}")]
-        public IActionResult GetDeckById(int id)
+        public async Task<IActionResult> GetDeckByIdAsync(int id)
         {
             _logger.Log(LogLevel.Information, message: "Getting Deck with ID: {0}", id);
-            var Deck = _deckDAL.GetDeckById(id);
+            var Deck = await _deckDAL.GetDeckById(id);
             return Ok(Deck);
         }
 

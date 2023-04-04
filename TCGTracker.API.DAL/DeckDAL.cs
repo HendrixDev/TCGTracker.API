@@ -25,7 +25,11 @@ namespace TCGTracker.API.DAL
 
         public async Task<IEnumerable<Deck>> GetAllDecksByPlayerId(int playerId)
         {
-            var query = $"SELECT * FROM Decks WHERE PlayerId = {playerId}";
+            var query = $"SELECT d.*, t1.TypeName AS TypeOne, t2.TypeName AS TypeTwo " +
+                $"FROM Decks d " +
+                $"LEFT JOIN [dbo].[Types] AS t1 ON t1.TypeId = d.TypeOneTypeId " +
+                $"LEFT JOIN [dbo].[Types] AS t2 ON t2.TypeId = d.TypeTwoTypeId " +
+                $"WHERE PlayerId = {playerId}";
             using var connection = _context.CreateConnection();
             var decks = await connection.QueryAsync<Deck>(query);
             return decks.ToList();
@@ -33,7 +37,11 @@ namespace TCGTracker.API.DAL
 
         public async Task<Deck> GetDeckById(int id)
         {
-            var query = $"SELECT TOP 1 * FROM Decks WHERE Id = {id}";
+            var query = $"SELECT TOP 1 d.*, t1.TypeName AS TypeOne, t2.TypeName AS TypeTwo " +
+                $"FROM Decks d " +
+                $"LEFT JOIN [dbo].[Types] AS t1 ON t1.TypeId = d.TypeOneTypeId " +
+                $"LEFT JOIN [dbo].[Types] AS t2 ON t2.TypeId = d.TypeTwoTypeId " +
+                $"WHERE DeckID = {id}";
             using var connection = _context.CreateConnection();
             var deck = await connection.QueryFirstOrDefaultAsync<Deck>(query);
             return deck;
