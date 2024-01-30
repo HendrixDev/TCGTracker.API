@@ -29,7 +29,7 @@ namespace TCGTracker.API
 
         // GET api/<DeckController>/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetDeckByIdAsync(int id)
+        public async Task<IActionResult> GetDeckById(int id)
         {
             _logger.Log(LogLevel.Information, message: "Getting Deck with ID: {0}", id);
             var Deck = await _deckDAL.GetDeckById(id);
@@ -47,10 +47,15 @@ namespace TCGTracker.API
 
         // PUT api/<DeckController>/5
         [HttpPut("{id}")]
-        public void UpdateDeck(int id, [FromBody] Deck deck)
+        public void UpdateDeck(int id, [FromBody] DeckUpdate updatedDeck)
         {
-            _deckDAL.UpdateDeck(id, deck);
+            _deckDAL.UpdateDeck(id, updatedDeck);
         }
 
+        [HttpDelete("{id}")]
+        public void DeleteDeck(int id)
+        {
+            _deckDAL.DeleteDeck(id);
+        }
     }
 }

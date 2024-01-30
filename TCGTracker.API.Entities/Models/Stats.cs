@@ -7,6 +7,19 @@
         public int TotalGamesPlayed { get; set; }
         public int Wins { get; set; }
         public int Losses => TotalGamesPlayed - Wins;
-        public double WinPercentage => Math.Round((double)Wins / TotalGamesPlayed * 100, 2);
+        public double WinPercentage => CalculateWinPercentage();
+
+        private double CalculateWinPercentage()
+        { 
+            if (TotalGamesPlayed == 0) 
+            {
+                return 0;
+            }
+
+            else
+            {
+                return Math.Round((double)Wins / TotalGamesPlayed * 100, 2);
+            }
+        }
     }
 }

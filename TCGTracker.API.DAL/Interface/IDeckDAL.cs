@@ -7,6 +7,7 @@ namespace TCGTracker.API.DAL.Interface
         Task<IEnumerable<Deck>> GetAllDecksByPlayerId(int playerId);
         Task<Deck> GetDeckById(int id);
         Task<int> CreateDeck(Deck deck);
-        Task<bool> UpdateDeck(int id, Deck deck);
+        Task<bool> UpdateDeck(int id, DeckUpdate update);
+        Task<bool> DeleteDeck(int id);
     }
 }
