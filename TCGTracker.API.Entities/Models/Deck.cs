@@ -5,6 +5,8 @@
         public int PlayerId { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
+        public int? TypeOneId { get; set; }
+        public int? TypeTwoId { get; set; }
         public string? TypeOne { get; set; }
         public string? TypeTwo { get; set; }
     }

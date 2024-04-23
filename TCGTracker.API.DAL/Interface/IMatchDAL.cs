@@ -8,5 +8,6 @@ namespace TCGTracker.API.DAL.Interface
         Task<Match> GetMatchById(int id);
         Task<int> CreateMatch(Match Match);
         Task<bool> UpdateMatch(int id, Match Match);
+        Task<bool> DeleteMatch(int id);
     }
 }

@@ -16,11 +16,11 @@ namespace TCGTracker.API.DAL
 
         public async Task<int> CreateMatch(Match Match)
         {
-            //TODO: add query to create match
-            var query = "";
+            var query = "INSERT INTO Matches(PlayerOne, PlayerTwo, PlayerOneDamage, PlayerTwoDamage, PlayerOneDeck, PlayerTwoDeck, Winner, Date, Notes) " +
+                                     "VALUES(@PlayerOne, @PlayerTwo, @PlayerOneDamage, @PlayerTwoDamage, @PlayerOneDeck, @PlayerTwoDeck, @Winner, @Date, @Notes)"; 
             using var connection = _context.CreateConnection();
-            var matchId = await connection.QueryFirstOrDefaultAsync<int>(query);
-            return matchId;
+            int rowsAffected = await connection.ExecuteAsync(query, Match);
+            return rowsAffected;
         }
 
         public async Task<IEnumerable<Match>> GetAllMatchesByPlayerId(int playerId)
@@ -43,8 +43,31 @@ namespace TCGTracker.API.DAL
         {
             try
             {
-                //TODO: write query to update Match by Id
-                var query = "";
+                var query = $"UPDATE Matches " +
+                            $"SET PlayerOne = @PlayerOne, " +
+                            $"PlayerTwo = @PlayerTwo, " +
+                            $"PlayerOneDamage = @PlayerOneDamage, " +
+                            $"PlayerTwoDamage =  @PlayerTwoDamage, " +
+                            $"PlayerOneDeck = @PlayerOneDeck, " +
+                            $"PlayerTwoDeck = @PlayerTwoDeck, " +
+                            $"Winner = @Winner, " +
+                            $"Notes = @Notes " +
+                            $"WHERE MatchId = {id}";
+                using var connection = _context.CreateConnection();
+                await connection.ExecuteAsync(query, match);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteMatch(int id)
+        {
+            try
+            {
+                var query = $"DELETE FROM Matches WHERE MatchID = {id}";
                 using var connection = _context.CreateConnection();
                 await connection.ExecuteAsync(query);
                 return true;

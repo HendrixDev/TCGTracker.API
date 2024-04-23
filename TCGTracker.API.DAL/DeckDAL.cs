@@ -48,7 +48,7 @@ namespace TCGTracker.API.DAL
             return deck;
         }
 
-        public async Task<bool> UpdateDeck(int id, DeckUpdate update)
+        public async Task<bool> UpdateDeck(int id, Deck deck)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace TCGTracker.API.DAL
                             $"SET Name = @Name, Description = @Description, TypeOneTypeId = @TypeOneId, TypeTwoTypeId =  @TypeTwoId " +
                             $"WHERE DeckID = {id}";
                 using var connection = _context.CreateConnection();
-                await connection.ExecuteAsync(query, update);
+                await connection.ExecuteAsync(query, deck);
                 return true;
             }
             catch

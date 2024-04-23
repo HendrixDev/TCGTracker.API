@@ -38,16 +38,16 @@ namespace TCGTracker.API
 
         // POST api/<DeckController>
         [HttpPost]
-        public IActionResult CreateDeck([FromBody] Deck deck)
+        public async Task<IActionResult> CreateDeck([FromBody] Deck deck)
         {
-            var rowsAffected = _deckDAL.CreateDeck(deck);
-            _logger.Log(LogLevel.Information, message: "Deck created successfully, rows affected: {0}", rowsAffected.Result);
-            return Ok(rowsAffected.Result);
+            var rowsAffected = await _deckDAL.CreateDeck(deck);
+            _logger.Log(LogLevel.Information, message: "Deck created successfully, rows affected: {0}", rowsAffected);
+            return Ok(rowsAffected);
         }
 
         // PUT api/<DeckController>/5
         [HttpPut("{id}")]
-        public void UpdateDeck(int id, [FromBody] DeckUpdate updatedDeck)
+        public void UpdateDeck(int id, [FromBody] Deck updatedDeck)
         {
             _deckDAL.UpdateDeck(id, updatedDeck);
         }
