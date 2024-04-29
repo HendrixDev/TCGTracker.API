@@ -11,15 +11,12 @@
 
         private double CalculateWinPercentage()
         { 
-            if (TotalGamesPlayed == 0) 
-            {
-                return 0;
-            }
-
-            else
+            if (TotalGamesPlayed > 0) 
             {
                 return Math.Round((double)Wins / TotalGamesPlayed * 100, 2);
             }
+
+            return 0;
         }
     }
 }

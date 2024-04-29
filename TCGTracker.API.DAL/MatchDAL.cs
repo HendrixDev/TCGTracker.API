@@ -14,6 +14,14 @@ namespace TCGTracker.API.DAL
             _context = context;
         }
 
+        public async Task<IEnumerable<Match>> GetAllMatches()
+        {
+            var query = $"SELECT * FROM Matches";
+            using var connection = _context.CreateConnection();
+            var matches = await connection.QueryAsync<Match>(query);
+            return matches.ToList();
+        }
+
         public async Task<int> CreateMatch(Match Match)
         {
             var query = "INSERT INTO Matches(PlayerOne, PlayerTwo, PlayerOneDamage, PlayerTwoDamage, PlayerOneDeck, PlayerTwoDeck, Winner, Date, Notes) " +
@@ -77,5 +85,7 @@ namespace TCGTracker.API.DAL
                 return false;
             }
         }
+
+        
     }
 }

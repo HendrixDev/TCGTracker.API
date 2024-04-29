@@ -22,6 +22,15 @@ namespace TCGTracker.API.Controllers
         }
 
         // GET: api/<MatchController>
+        [HttpGet]
+        public async Task<IActionResult> GetAllMatches()
+        {
+            _logger.Log(LogLevel.Information, message: "Getting all Matches");
+            var matches = await _matchDAL.GetAllMatches();
+            return Ok(matches);
+        }
+
+        // GET: api/<MatchController>
         [HttpGet("{playerId}")]
         public IActionResult GetAllMatchesByPlayerId(int playerId)
         {
@@ -30,17 +39,6 @@ namespace TCGTracker.API.Controllers
             _logger.Log(LogLevel.Information, message: "Getting all Matches for player with Id: {0}", playerId);
             var matches = _matchDAL.GetAllMatchesByPlayerId(playerId);
             return Ok(matches);
-        }
-
-        // GET api/<MatchController>/5
-        [HttpGet("{id}")]
-        public IActionResult GetMatchById(int id)
-        {
-            //Do I even need this endpoint? What is the purpose of just grabbing a single match?
-            //Maybe to display an edit screen, but you could just grab a certain match using the endpoint above.
-            _logger.Log(LogLevel.Information, message: "Getting Match with ID: {0}", id);
-            var match = _matchDAL.GetMatchById(id);
-            return Ok(match);
         }
 
         // POST api/<MatchController>
